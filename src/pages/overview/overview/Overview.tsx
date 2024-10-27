@@ -1,9 +1,9 @@
-import SellAndRevenueChart from "@/components/overview/overview/TopChart";
+import DashboardPage from "@/components/overview/overview/Dashboard";
 
 function Overview() {
 	return (
 		<>
-			<SellAndRevenueChart />
+			<DashboardPage />
 		</>
 	);
 }

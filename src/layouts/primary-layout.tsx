@@ -6,10 +6,14 @@ function PrimaryLayout() {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<main className="p-2">
+
+			{/* main part is here */}
+			<main className="w-full overflow-hidden">
 				<div className="fixed bottom-2">
 					<SidebarTrigger />
 				</div>
+
+				{/* dynamic webpage */}
 				<Outlet />
 			</main>
 		</SidebarProvider>
