@@ -1,9 +1,7 @@
 function Overview() {
 	return (
 		<>
-			<div>
-				<h1>Overview</h1>
-			</div>
+			<h1>Hello word!</h1>
 		</>
 	);
 }

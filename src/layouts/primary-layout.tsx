@@ -1,14 +1,16 @@
-import Footer from "@/components/shared/Footer";
-import Navbar from "@/components/shared/Navbar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
 
 function PrimaryLayout() {
 	return (
-		<>
-			<Navbar />
-			<Outlet />
-			<Footer />
-		</>
+		<SidebarProvider>
+			<AppSidebar />
+			<main className="pl-2">
+				<SidebarTrigger />
+				<Outlet />
+			</main>
+		</SidebarProvider>
 	);
 }
 
