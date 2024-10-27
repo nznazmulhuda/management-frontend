@@ -9,7 +9,7 @@ function PrimaryLayout() {
 
 			{/* main part is here */}
 			<main className="w-full overflow-hidden">
-				<div className="fixed bottom-2">
+				<div className="fixed bottom-2 pl-2">
 					<SidebarTrigger />
 				</div>
 

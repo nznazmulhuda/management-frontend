@@ -2,6 +2,8 @@ import { PrimaryLayout } from "@/layouts";
 import ErrorPage from "@/pages/error/ErrorPage";
 import { createBrowserRouter } from "react-router-dom";
 import { Analytics, Notifications, Overview, Reports } from "@/pages/overview";
+import Login from "@/pages/auth/Login";
+import AuthLayout from "@/layouts/auth-layouts";
 
 export const Route = createBrowserRouter([
 	{
@@ -24,6 +26,17 @@ export const Route = createBrowserRouter([
 			{
 				path: "/reports",
 				element: <Reports />,
+			},
+		],
+	},
+	{
+		path: "/authentication",
+		element: <AuthLayout />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: "/authentication/login",
+				element: <Login />,
 			},
 		],
 	},

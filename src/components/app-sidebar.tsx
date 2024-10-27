@@ -73,7 +73,7 @@ export function AppSidebar() {
 				{/* sidebar header body */}
 				<Button variant={"ghost"} className="flex justify-start p-0">
 					<img src="/favicon.png" width={40} height={40} />
-					Orbit Outfit
+					Orbit Outfit Management
 				</Button>
 			</SidebarHeader>
 
