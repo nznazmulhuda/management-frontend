@@ -1,7 +1,9 @@
+import SellAndRevenueChart from "@/components/overview/overview/TopChart";
+
 function Overview() {
 	return (
 		<>
-			<h1>Hello word!</h1>
+			<SellAndRevenueChart />
 		</>
 	);
 }

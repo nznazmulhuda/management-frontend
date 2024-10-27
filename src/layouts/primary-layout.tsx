@@ -6,8 +6,10 @@ function PrimaryLayout() {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<main className="pl-2">
-				<SidebarTrigger />
+			<main className="p-2">
+				<div className="fixed bottom-2">
+					<SidebarTrigger />
+				</div>
 				<Outlet />
 			</main>
 		</SidebarProvider>
