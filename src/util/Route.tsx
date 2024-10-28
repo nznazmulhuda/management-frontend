@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Analytics, Notifications, Overview, Reports } from "@/pages/overview";
 import Login from "@/pages/auth/Login";
 import AuthLayout from "@/layouts/auth-layouts";
+import Register from "@/pages/auth/Register";
 
 export const Route = createBrowserRouter([
 	{
@@ -37,6 +38,10 @@ export const Route = createBrowserRouter([
 			{
 				path: "/authentication/login",
 				element: <Login />,
+			},
+			{
+				path: "/authentication/register",
+				element: <Register />,
 			},
 		],
 	},
