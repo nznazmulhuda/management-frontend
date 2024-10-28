@@ -6,23 +6,24 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SpinJSON from "@/assets/loading.json";
 import { useLottie } from "lottie-react";
-import { OTPForm } from "./OtpForm";
+import { useAuth } from "@/hooks/useAuth";
 
 export function UserAuthForm({
 	className,
 	...props
 }: React.HTMLAttributes<HTMLDivElement>) {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
-	const [isEmailVefiry, setIsEmailVerify] = React.useState<boolean>(false);
+	const data = useAuth();
 
 	async function onSubmit(event: React.SyntheticEvent) {
 		event.preventDefault();
 		setIsLoading(true);
 
-		setTimeout(() => {
-			setIsLoading(false);
-			setIsEmailVerify(true);
-		}, 3000);
+		// Access form elements through FormEvent target
+		const form = event.target as HTMLFormElement;
+		const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+		data?.EmailVerify(emailInput.value);
+		setIsLoading(false);
 	}
 
 	const LottieOptions = {
@@ -31,10 +32,6 @@ export function UserAuthForm({
 	};
 
 	const { View } = useLottie(LottieOptions);
-
-	if (isEmailVefiry) {
-		return <OTPForm />;
-	}
 
 	return (
 		<div className={cn("grid gap-6", className)} {...props}>
@@ -52,6 +49,7 @@ export function UserAuthForm({
 							autoComplete="email"
 							autoCorrect="off"
 							disabled={isLoading}
+							name="email"
 						/>
 					</div>
 

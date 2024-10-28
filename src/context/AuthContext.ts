@@ -1,7 +1,4 @@
 import { createContext } from "react";
+import { AuthValue } from "@/provider/auth-provider";
 
-export type AuthContextType = {
-	test: string;
-} | null;
-
-export const AuthContext = createContext<AuthContextType>(null);
+export const AuthContext = createContext<AuthValue>(null);

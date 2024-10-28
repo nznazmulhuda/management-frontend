@@ -1,9 +1,56 @@
 import { AuthContext } from "@/context/AuthContext";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+
+// auth value interface
+export type AuthValue = {
+	EmailVerify: (email: string) => void;
+	OtpVerify: (otp: string) => void;
+	Login: (password: string) => void;
+	isEmailVerify: boolean;
+	isOtpVerify: boolean | null;
+	userEmail: string;
+} | null;
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-	const AuthValue: { test: string } = {
-		test: "demo",
+	const [isEmailVerify, setIsEmailVerify] = useState<boolean>(false);
+	const [isOtpVerify, setIsOtpVerify] = useState<boolean | null>(null);
+	const [userEmail, setUserEmail] = useState<string>("");
+
+	// email verify
+	const EmailVerify = (email: string) => {
+		console.log(email);
+		setUserEmail(email);
+		return setIsEmailVerify(true);
+	};
+
+	// otp verify
+	const OtpVerify = (otp: string) => {
+		console.log(otp);
+		if (otp === "123456") {
+			return setIsOtpVerify(true);
+		}
+
+		return setIsOtpVerify(false);
+	};
+
+	// login function
+	const Login = (password: string) => {
+		const user = {
+			email: userEmail,
+			password,
+		};
+
+		console.log(user);
+	};
+
+	// all global auth value
+	const AuthValue: AuthValue = {
+		EmailVerify,
+		OtpVerify,
+		Login,
+		isEmailVerify,
+		isOtpVerify,
+		userEmail,
 	};
 
 	return (

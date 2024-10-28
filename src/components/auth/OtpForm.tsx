@@ -4,10 +4,18 @@ import {
 	InputOTPSeparator,
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { useAuth } from "@/hooks/useAuth";
 
 export function OTPForm() {
+	const data = useAuth();
+	const handleOTPVerify = (str: string) => {
+		if (str.length > 5) {
+			data?.OtpVerify(str);
+		}
+	};
+
 	return (
-		<InputOTP maxLength={6}>
+		<InputOTP maxLength={6} onChange={(str) => handleOTPVerify(str)}>
 			<InputOTPGroup>
 				<InputOTPSlot index={0} />
 				<InputOTPSlot index={1} />
