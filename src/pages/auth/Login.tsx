@@ -4,10 +4,11 @@ import PasswordForm from "@/components/auth/PasswordForm";
 import { buttonVariants } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Login() {
 	const data = useAuth();
+	const { state } = useLocation();
 
 	if (data?.isOtpVerify) {
 		return (
@@ -58,7 +59,7 @@ function Login() {
 
 						{/* password form */}
 						<div className="flex justify-center">
-							<PasswordForm />
+							<PasswordForm state={state} />
 						</div>
 
 						<p className="px-8 text-center text-sm text-muted-foreground">

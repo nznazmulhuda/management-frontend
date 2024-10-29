@@ -1,4 +1,4 @@
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
@@ -6,13 +6,15 @@ import { Navigate } from "react-router-dom";
 export default function IsNotLogin({ children }: { children: ReactNode }) {
 	const data = useAuth();
 
-	const { toast } = useToast();
+	if (data?.isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
-	if (data?.user && data.user.role === "admin") {
+	if (data?.user) {
 		toast({
-			variant: "default",
 			title: "You are already loged in!",
 		});
+
 		return <Navigate to={"/"} />;
 	}
 

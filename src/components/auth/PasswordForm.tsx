@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { SyntheticEvent } from "react";
 
-function PasswordForm() {
+function PasswordForm({ state }: { state: string }) {
 	const data = useAuth();
 
 	const handleSubmit = (e: SyntheticEvent) => {
@@ -13,7 +13,7 @@ function PasswordForm() {
 		const form = e.target as HTMLFormElement;
 		const password = form.elements.namedItem("password") as HTMLInputElement;
 
-		data?.Login(password.value);
+		data?.Login(password.value, state);
 	};
 
 	return (

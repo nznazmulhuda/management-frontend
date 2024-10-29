@@ -8,6 +8,10 @@ export default function PrivateRoute({ children }: { children: ReactNode }) {
 	const { pathname } = useLocation();
 	const { toast } = useToast();
 
+	if (data?.isLoading) {
+		return <h1>Loading...</h1>;
+	}
+
 	if (data?.user && data.user.role === "admin") {
 		return children;
 	}
