@@ -25,7 +25,7 @@ function PasswordForm() {
 				required
 			/>
 
-			<Button variant={"ghost"} className="mt-2 mx-auto w-full">
+			<Button variant={"ghost"} type="submit" className="mt-2 mx-auto w-full">
 				Login
 			</Button>
 		</form>

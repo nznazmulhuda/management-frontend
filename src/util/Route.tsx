@@ -5,6 +5,8 @@ import { Analytics, Notifications, Overview, Reports } from "@/pages/overview";
 import Login from "@/pages/auth/Login";
 import AuthLayout from "@/layouts/auth-layouts";
 import Register from "@/pages/auth/Register";
+import PrivateRoute from "./PrivateRoute";
+import IsNotLogin from "./isLogin";
 
 export const Route = createBrowserRouter([
 	{
@@ -14,19 +16,37 @@ export const Route = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				element: <Overview />,
+				element: (
+					<>
+						<PrivateRoute>
+							<Overview />
+						</PrivateRoute>
+					</>
+				),
 			},
 			{
 				path: "/analytics",
-				element: <Analytics />,
+				element: (
+					<PrivateRoute>
+						<Analytics />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/notifications",
-				element: <Notifications />,
+				element: (
+					<PrivateRoute>
+						<Notifications />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/reports",
-				element: <Reports />,
+				element: (
+					<PrivateRoute>
+						<Reports />
+					</PrivateRoute>
+				),
 			},
 		],
 	},
@@ -37,11 +57,19 @@ export const Route = createBrowserRouter([
 		children: [
 			{
 				path: "/authentication/login",
-				element: <Login />,
+				element: (
+					<IsNotLogin>
+						<Login />
+					</IsNotLogin>
+				),
 			},
 			{
 				path: "/authentication/register",
-				element: <Register />,
+				element: (
+					<IsNotLogin>
+						<Register />
+					</IsNotLogin>
+				),
 			},
 		],
 	},

@@ -9,12 +9,20 @@ export type AuthValue = {
 	isEmailVerify: boolean;
 	isOtpVerify: boolean | null;
 	userEmail: string;
+	user: UserInterface;
+} | null;
+
+// user interface
+type UserInterface = {
+	email: string;
+	role: string;
 } | null;
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [isEmailVerify, setIsEmailVerify] = useState<boolean>(false);
 	const [isOtpVerify, setIsOtpVerify] = useState<boolean | null>(null);
 	const [userEmail, setUserEmail] = useState<string>("");
+	const [user, setUser] = useState<UserInterface>(null);
 
 	// email verify
 	const EmailVerify = (email: string) => {
@@ -35,12 +43,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	// login function
 	const Login = (password: string) => {
-		const user = {
+		const userData = {
 			email: userEmail,
 			password,
 		};
 
-		console.log(user);
+		setUser({
+			email: userEmail,
+			role: "admin",
+		});
+
+		console.log(userData);
 	};
 
 	// all global auth value
@@ -51,6 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 		isEmailVerify,
 		isOtpVerify,
 		userEmail,
+		user,
 	};
 
 	return (
