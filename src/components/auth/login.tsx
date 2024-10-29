@@ -22,6 +22,8 @@ export function UserAuthForm({
 		// Access form elements through FormEvent target
 		const form = event.target as HTMLFormElement;
 		const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+
+		// email verify
 		data?.EmailVerify(emailInput.value);
 		setIsLoading(false);
 	}

@@ -1,4 +1,6 @@
 import { AuthContext } from "@/context/AuthContext";
+import { toast } from "@/hooks/use-toast";
+import axios from "axios";
 import { ReactNode, useState } from "react";
 
 // auth value interface
@@ -25,15 +27,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [user, setUser] = useState<UserInterface>(null);
 
 	// email verify
-	const EmailVerify = (email: string) => {
-		console.log(email);
-		setUserEmail(email);
-		return setIsEmailVerify(true);
+	const EmailVerify = async (email: string): Promise<boolean> => {
+		axios
+			.get("/get_user_by_email", { headers: { email } })
+			.then((res) => {
+				if (res.data.success) {
+					toast({
+						variant: "default",
+						title: "Check your mail and submit the OTP.",
+					});
+					setIsEmailVerify(true);
+					setUserEmail(email);
+					return true;
+				}
+			})
+			.catch((err) => {
+				toast({
+					variant: "destructive",
+					title: err.response.data.message,
+				});
+				return false;
+			});
+
+		return false;
 	};
 
 	// otp verify
-	const OtpVerify = (otp: string) => {
-		console.log(otp);
+	const OtpVerify = async (otp: string) => {
 		if (otp === "123456") {
 			return setIsOtpVerify(true);
 		}
@@ -43,17 +63,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	// login function
 	const Login = (password: string) => {
+		// set data for send to backend by headers
 		const userData = {
 			email: userEmail,
 			password,
 		};
 
-		setUser({
-			email: userEmail,
-			role: "admin",
-		});
+		axios
+			.get("/login", { headers: userData })
+			.then((res) => {
+				// give him a toast
+				toast({
+					variant: "default",
+					title: "Login successfully!",
+				});
 
-		console.log(userData);
+				// set user
+				setUser({
+					email: res.data.data.email,
+					role: res.data.data.role,
+				});
+
+				// return void
+				return;
+			})
+			.catch(() => {
+				// give him a error message
+				toast({
+					variant: "destructive",
+					title: "Wrong password! Try again.",
+				});
+
+				// return void
+				return;
+			});
 	};
 
 	// all global auth value
