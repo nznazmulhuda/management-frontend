@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./provider/auth-provider.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
 import axios from "axios";
+import { ButtonProvider } from "./provider/all-button-provider.tsx";
 
 // axios all defaults value
 axios.defaults.withCredentials = true;
@@ -18,11 +19,13 @@ createRoot(document.getElementById("root")!).render(
 		<AuthProvider>
 			{/* theme provider */}
 			<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-				{/* router provider */}
-				<RouterProvider router={Route} />
+				<ButtonProvider>
+					{/* router provider */}
+					<RouterProvider router={Route} />
 
-				{/* toaster */}
-				<Toaster />
+					{/* toaster */}
+					<Toaster />
+				</ButtonProvider>
 			</ThemeProvider>
 		</AuthProvider>
 	</StrictMode>,

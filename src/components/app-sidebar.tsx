@@ -8,6 +8,7 @@ import {
 	BadgeCheck,
 	LogOut,
 	BellDot,
+	Plus,
 } from "lucide-react";
 
 import {
@@ -35,6 +36,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useButton } from "@/hooks/useButton";
 
 // Menu items.
 const items = [
@@ -66,6 +68,16 @@ const items = [
 ];
 
 export function AppSidebar() {
+	const data = useButton();
+
+	// Buttons
+	const buttons = [
+		{
+			title: "Add New Sell",
+			func: data?.SellButton,
+			icon: Plus,
+		},
+	];
 	return (
 		<Sidebar>
 			{/* sidebar header */}
@@ -104,6 +116,31 @@ export function AppSidebar() {
 												<SidebarMenuBadge>2</SidebarMenuBadge>
 											)}
 										</NavLink>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							))}
+						</SidebarMenu>
+					</SidebarGroupContent>
+				</SidebarGroup>
+
+				{/* add new data part */}
+				<SidebarGroup>
+					{/* sidebar main content label */}
+					<SidebarGroupLabel>Extra route</SidebarGroupLabel>
+
+					{/* all routes */}
+					<SidebarGroupContent>
+						<SidebarMenu>
+							{buttons.map((item) => (
+								<SidebarMenuItem key={item.title}>
+									<SidebarMenuButton
+										asChild
+										isActive={data?.isSellButton && true}
+									>
+										<p onClick={item.func} className={`cursor-pointer`}>
+											<item.icon />
+											{item.title}
+										</p>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
