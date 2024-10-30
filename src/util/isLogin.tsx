@@ -1,4 +1,3 @@
-import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
@@ -11,10 +10,6 @@ export default function IsNotLogin({ children }: { children: ReactNode }) {
 	}
 
 	if (data?.user) {
-		toast({
-			title: "You are already loged in!",
-		});
-
 		return <Navigate to={"/"} />;
 	}
 
